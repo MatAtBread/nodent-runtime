@@ -21,7 +21,7 @@ function processIncludes(includes,input) {
     var src = input.toString() ;
     var t = "return "+src ;
     var args = src.match(/.*\(([^)]*)\)/)[1] ;
-    var re = /!!!'([^']*)'/g ;
+    var re = /['"]!!!([^'"]*)['"]/g ;
     var m = [] ;
     while (1) {
         var mx = re.exec(t) ;
@@ -67,8 +67,8 @@ function $asyncbind(self,catcher) {
         };
     }
     if (!$asyncbind.LazyThenable) {
-        $asyncbind.LazyThenable = !!!'thenable'();
-        $asyncbind.EagerThenable = $asyncbind.Thenable = ($asyncbind.EagerThenableFactory = !!!'zousan')();
+        $asyncbind.LazyThenable = '!!!thenable'();
+        $asyncbind.EagerThenable = $asyncbind.Thenable = ($asyncbind.EagerThenableFactory = '!!!zousan')();
     }
 
     var resolver = this;
