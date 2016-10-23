@@ -13,7 +13,7 @@
  *      It is the same as calling 'new Promise(this)', where 'this' is the function being bound/wrapped
  * 4) If called with the second parameter===0, it is the same use as (1), but the function is wrapped
  *      in a 'LazyThenable', which executes lazily and can resolve synchronously.
- *      It is the same as calling 'new LazyThenable(this)' (if such a type were exposed), where 'this' is 
+ *      It is the same as calling 'new LazyThenable(this)' (if such a type were exposed), where 'this' is
  *      the function being bound/wrapped
  */
 
@@ -45,13 +45,15 @@ function $asyncbind(self,catcher) {
     if (!Function.prototype.$asyncbind) {
         Object.defineProperty(Function.prototype,"$asyncbind",{value:$asyncbind,enumerable:false,configurable:true,writable:true}) ;
     }
-    
+
     if (!$asyncbind.trampoline) {
-      $asyncbind.trampoline = function trampoline(t,x,s,e){
+      $asyncbind.trampoline = function trampoline(t,x,s,e,u){
         return function b(q) {
                 while (q) {
-                    if (q.then)
-                        return q.then(b, e);
+                    if (q.then) {
+                        q = q.then(b, e) ;
+                        return u?undefined:q;
+                    }
                     try {
                         if (q.pop) {
                             if (q.length)
@@ -100,7 +102,7 @@ function $asyncspawn(promiseProvider,self) {
         Object.defineProperty(Function.prototype,"$asyncspawn",{value:$asyncspawn,enumerable:false,configurable:true,writable:true}) ;
     }
     if (!(this instanceof Function)) return ;
-    
+
     var genF = this ;
     return new promiseProvider(function enough(resolve, reject) {
         var gen = genF.call(self, resolve, reject);
