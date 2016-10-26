@@ -1,10 +1,11 @@
 {
   "name": "nodent-runtime",
-  "version": "3.0.2",
+  "version": "3.0.3",
   "description": "Runtime component of nodent",
   "main": "runtime.js",
   "scripts": {
-    "test": "node tests"
+    "test": "node tests",
+    "install": "node build.js"
   },
   "repository": {
     "type": "git",
