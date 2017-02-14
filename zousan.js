@@ -2,7 +2,7 @@
 zousan - A Lightning Fast, Yet Very Small Promise A+ Compliant Implementation
 https://github.com/bluejava/zousan
 Author: Glenn Crownover <glenn@bluejava.com> (http://www.bluejava.com)
-Version 2.3.2
+Version 2.3.3
 License: MIT */
 "use strict";
 module.exports = function(tick){
@@ -11,7 +11,7 @@ module.exports = function(tick){
         var fq = [], fqStart = 0, bufferSize = 1024;
         function callQueue() {
             while (fq.length - fqStart) {
-                fq[fqStart]();
+                try { fq[fqStart]() } catch(ex) { /* console.error(ex) */ }
                 fq[fqStart++] = undefined;
                 if (fqStart === bufferSize) {
                     fq.splice(0, bufferSize);
@@ -147,7 +147,7 @@ module.exports = function(tick){
         z.reject(err);
         return z;
     };
-    
-    Zousan.version = "2.3.2-nodent" ;
+
+    Zousan.version = "2.3.3-nodent" ;
     return Zousan ;
 };
