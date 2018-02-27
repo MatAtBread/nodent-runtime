@@ -27,17 +27,18 @@ module.exports = function() {
         }
     }
 
+    function _unchained(v){}
+    function thenChain(res,rej){
+        this.resolve = res;
+        this.reject = rej;
+    }
+
     function Chained() {};
     Chained.prototype = {
         resolve:_unchained,
         reject:_unchained,
         then:thenChain
     };
-    function _unchained(v){}
-    function thenChain(res,rej){
-        this.resolve = res;
-        this.reject = rej;
-    }
     
     function then(res,rej){
         var chain = new Chained() ;
