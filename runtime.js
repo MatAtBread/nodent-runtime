@@ -73,6 +73,10 @@ function $asyncbind(self,catcher) {
         $asyncbind.EagerThenable = $asyncbind.Thenable = ($asyncbind.EagerThenableFactory = '!!!zousan')();
     }
 
+    function boundThen() {
+        return resolver.apply(self,arguments);
+    }
+
     var resolver = this;
     switch (catcher) {
     case true:
@@ -92,9 +96,7 @@ function $asyncbind(self,catcher) {
             }
         }
     }
-    function boundThen() {
-        return resolver.apply(self,arguments);
-    }
+
 }) ;
 
 function $asyncspawn(promiseProvider,self) {
