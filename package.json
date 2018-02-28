@@ -1,6 +1,6 @@
 {
   "name": "nodent-runtime",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "Runtime component of nodent",
   "main": "runtime.js",
   "scripts": {
